@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "easyOpen",
+  "description": "This extension make it easy to open search results using the keyboard",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*.google.com/",
+    "https://*.google.com/",
+    "http://*.google.co.il/",
+    "https://*.google.co.il/"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.google.com/*",
+        "https://*.google.com/*",
+        "http://*.google.co.il/*",
+        "https://*.google.co.il/*"
+      ], 
+      "js": [ "easyOpen.js" ],
+      "run_at": "document_end"
+    }
+  ],
+
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": true
+  }
+}
