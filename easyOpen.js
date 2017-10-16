@@ -50,12 +50,15 @@ function send_open_message(actionLink) {
 		init_action_links(search_results());
 
 		document.addEventListener("keypress", function (keypressed) {
-			var ch = keypressed.key;
+			if (document.getElementById('search_input') != document.activeElement)
+			{
+				var ch = keypressed.key;
 
-			var result = action_links.find(function (actionLink) { return actionLink.character == ch; });
+				var result = action_links.find(function (actionLink) { return actionLink.character == ch; });
 
-			if (result != undefined) {
-				send_open_message(result);
+				if (result != undefined) {
+					send_open_message(result);
+				}
 			}
 		});
 	}
