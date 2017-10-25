@@ -3,7 +3,7 @@
 
   "name": "EasyOpen",
   "description": "This extension make it easy to open search results using the keyboard",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "browser_action": {
     "default_popup": "popup.html"
@@ -11,21 +11,19 @@
 
   "permissions": [
     "activeTab",
-    "tabs",
-    "http://*.google.com/",
-    "https://*.google.com/",
-    "http://*.google.co.il/",
-    "https://*.google.co.il/"
+    "tabs"
   ],
 
   "content_scripts": [
     {
       "matches": [
-        "http://*.google.com/*",
-        "https://*.google.com/*",
-        "http://*.google.co.il/*",
-        "https://*.google.co.il/*"
-      ], 
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "http://*.google.*/search*q=*",
+        "https://*.google.*/search*q=*"
+      ],
       "js": [ "easyOpen.js" ],
       "run_at": "document_end"
     }
