@@ -20,7 +20,7 @@ function init_action_links(links)
         shortcut.innerText = n;
         shortcut.className = 'shortcut';
 
-        link.parentElement.parentElement.prepend(shortcut);
+        link.parentElement.prepend(shortcut);
 
         // Add extension action
 		action_links[n] = {url: link.href, action: "create"};
