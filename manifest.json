@@ -25,6 +25,7 @@
         "https://*.google.*/search*q=*"
       ],
       "js": [ "easyOpen.js" ],
+      "css": [ "easyOpen.css" ],
       "run_at": "document_end"
     }
   ],

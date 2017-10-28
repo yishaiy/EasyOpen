@@ -1,4 +1,4 @@
-var action_links = new Array;
+var action_links = {};
 
 function init_action_links(links)
 {
@@ -15,14 +15,20 @@ function init_action_links(links)
 		n = nums[i];
 		sn = shift_nums[i];
 
-		link.innerHTML = n + '. ' + link.innerHTML;
+        // Show shortcut key
+        var shortcut = document.createElement('div');
+        shortcut.innerText = n;
+        shortcut.className = 'shortcut';
 
-		action_links.push({character: n, url: link.href, action: "create"});
-		action_links.push({character: sn, url: link.href, action: "update"});
+        link.parentElement.parentElement.prepend(shortcut);
+
+        // Add extension action
+		action_links[n] = {url: link.href, action: "create"};
+		action_links[sn] = {url: link.href, action: "update"};
 	}
 }
 
-function search_results()
+function rimon_search_results()
 {
 	var links = document.getElementsByTagName('a');
 	links = Array.prototype.slice.call(links);
@@ -36,9 +42,28 @@ function search_results()
 	return links;
 }
 
+function normal_search_results()
+{
+    var h3s = Array.prototype.slice.call(document.getElementsByTagName('h3'));
+    var links = h3s.map(h3 => h3.getElementsByTagName('a')[0]);
+
+    return links;
+}
+
+function search_results()
+{
+    var links = rimon_search_results();
+
+    if (links.length == 0) {
+        links = normal_search_results();
+    }
+
+    return links;
+}
+
 
 function send_open_message(actionLink) {
-	chrome.runtime.sendMessage({action: actionLink.action, url: actionLink.url});
+	chrome.runtime.sendMessage(actionLink);
 }
 
 
@@ -50,7 +75,7 @@ function send_open_message(actionLink) {
 		{
 			var ch = keypressed.key;
 
-			var result = action_links.find(function (actionLink) { return actionLink.character == ch; });
+			var result = action_links[ch];
 
 			if (result != undefined) {
 				send_open_message(result);
