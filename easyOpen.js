@@ -16,16 +16,7 @@ function init_action_links(links)
 		sn = shift_nums[i];
 
         // Show shortcut key
-        var shortcut = document.createElement('div');
-        shortcut.innerText = n;
-		if (window.getComputedStyle(document.getElementsByTagName('html')[0], null).getPropertyValue('direction') == 'rtl') {
-			shortcut.className = 'shortcut_rtl';
-		}
-		else {
-			shortcut.className = 'shortcut';
-		}
-
-        link.parentElement.prepend(shortcut);
+        link.innerHTML = n + '. ' + link.innerHTML;
 
         // Add extension action
 		action_links[n] = {url: link.href, action: "create"};
