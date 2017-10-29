@@ -1,5 +1,31 @@
 var action_links = {};
 
+function insert_shortcut_key(link, n)
+{
+	chrome.runtime.sendMessage({action: "design"}, function(response) {
+		var option = response.design;
+		console.log(option);
+		console.log('in design response message');
+		
+		if (option == "Normal") {
+			link.innerHTML = n + '. ' + link.innerHTML;
+		} else if (option == "Separate") {
+			var shortcut = document.createElement('div');
+			shortcut.innerText = n;
+			
+			direction = window.getComputedStyle(document.getElementsByTagName('html')[0], null).getPropertyValue('direction');
+			if (direction == 'rtl') {
+				shortcut.className = 'shortcut_rtl';
+			}
+			else {
+				shortcut.className = 'shortcut';
+			}
+
+			link.parentElement.prepend(shortcut);
+		}
+	});
+}
+
 function init_action_links(links)
 {
 	var nums = "1234567890";
@@ -16,16 +42,7 @@ function init_action_links(links)
 		sn = shift_nums[i];
 
         // Show shortcut key
-        var shortcut = document.createElement('div');
-        shortcut.innerText = n;
-		if (window.getComputedStyle(document.getElementsByTagName('html')[0], null).getPropertyValue('direction') == 'rtl') {
-			shortcut.className = 'shortcut_rtl';
-		}
-		else {
-			shortcut.className = 'shortcut';
-		}
-
-        link.parentElement.prepend(shortcut);
+        insert_shortcut_key(link, n);
 
         // Add extension action
 		action_links[n] = {url: link.href, action: "create"};

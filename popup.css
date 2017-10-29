@@ -3,7 +3,32 @@ p {
 }
 
 body {
-	width:max-content;
-	height:max-content;
-	background-color:lightslategray;
+	width: max-content;
+	height: max-content;
+	background-color: lightslategray;
+}
+
+.shortcutkey-design {
+	background-color: inherit;
+}
+
+.shortcutkey-design label {
+	background-color: white;
+	border: 1px solid black;
+	display: grid;
+	width: 50%;
+}
+
+.shortcutkey-design label span {
+	text-align: center;
+	padding: 10px 0px;
+}
+
+.shortcutkey-design label input {
+	position: absolute;
+	top: -20px;
+}
+
+.shortcutkey-design input:checked + span {
+	background-color: deepskyblue;
 }
