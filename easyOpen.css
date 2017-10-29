@@ -1,6 +1,19 @@
+.shortcut_rtl {
+    position: absolute;
+    transform: translate(2em, 1em);
+    line-height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: x-large;
+    background-color: gold;
+}
+
 .shortcut {
     position: absolute;
-    transform: translate(2em);
+    transform: translate(-2em, 1em);
     line-height: 30px;
     border: 1px solid black;
     border-radius: 5px;
