@@ -67,7 +67,7 @@ function send_open_message(actionLink) {
 	init_action_links(search_results());
 
 	document.addEventListener("keypress", function (keypressed) {
-		if (document.getElementById('search_input') != document.activeElement)
+		if (document.activeElement.tagName.ToLowerCase() === "input")
 		{
 			var ch = keypressed.key;
 
